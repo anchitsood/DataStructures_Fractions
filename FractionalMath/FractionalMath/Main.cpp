@@ -7,7 +7,6 @@
 //equality, non - equality
 //greater than, less than
 //display
-//If possible, please send me your solution by 9 AM on 2nd May, 2017 (Tue.).If you need more time for some reasons please let me know.Once we have received your solution, we will make decision on the next step of the interview process and communicate accordingly.
 
 
 /*
