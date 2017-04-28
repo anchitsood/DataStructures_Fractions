@@ -1,7 +1,4 @@
-//Hi Anchit,
-//
-//I’m writing in regard to your application for software engineer position at MathWorks.Thank you for applying for the position.As a next step in the process, I’d like to ask you to do the coding exercise described below.
-//
+
 //Implement in C++ a Fraction class that supports the following operations, including unit test verifying their functionality :
 //addition
 //subtraction
@@ -10,12 +7,15 @@
 //equality, non - equality
 //greater than, less than
 //display
-//If possible, please send me your solution by 9 AM on 2nd May, 2017 (Tue.).If you need more time for some reasons please let me know.Once we have received your solution, we will make decision on the next step of the interview process and communicate accordingly.
-//
-//I look forward to hearing from you.
-//
-//Regards
-//Yuki Saito
+
+
+
+/*
+Author: Anchit Sood
+Date: 4/27/2017
+License: GNU GPLv3
+Fraction class
+*/
 
 
 #include <stdio.h>

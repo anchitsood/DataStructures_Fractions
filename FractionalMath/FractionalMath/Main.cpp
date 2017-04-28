@@ -1,7 +1,4 @@
-//Hi Anchit,
-//
-//I’m writing in regard to your application for software engineer position at MathWorks.Thank you for applying for the position.As a next step in the process, I’d like to ask you to do the coding exercise described below.
-//
+
 //Implement in C++ a Fraction class that supports the following operations, including unit test verifying their functionality :
 //addition
 //subtraction
@@ -11,11 +8,15 @@
 //greater than, less than
 //display
 //If possible, please send me your solution by 9 AM on 2nd May, 2017 (Tue.).If you need more time for some reasons please let me know.Once we have received your solution, we will make decision on the next step of the interview process and communicate accordingly.
-//
-//I look forward to hearing from you.
-//
-//Regards
-//Yuki Saito
+
+
+/*
+Author: Anchit Sood
+Date: 4/27/2017
+License: GNU GPLv3
+Unit tests for Fraction class
+*/
+
 
 #include "Fraction.h"
 
@@ -33,7 +34,7 @@ int main()
 
 		
 	// Test 1.1: Positive denominator ensured
-	cout << "Test 1.1: No matter what, the denominator is always positive" << endl;
+	cout << "Test 1.1: Sign of the denominator" << endl;
 	Fraction frac01(-4, 10);
 	Fraction frac02(6, -15);
 	cout << "Constructors for the fractions below are Fraction(-4,10) and Fraction(6,-15)" << endl;
@@ -59,7 +60,7 @@ int main()
 
 	// Section 2: Simple manipulation of fractions		
 	cout << "Section 2: Simple manipulation of fractions" << endl;
-	cout << "We test the Fraction class for the reduce() and reciprocal() methods" << endl << endl << endl;
+	cout << "We test the Fraction class for the reduce() and reciprocal() member functions" << endl << endl << endl;
 
 
 	// Test 2.1: Reduce a fraction to simplest form
@@ -74,7 +75,7 @@ int main()
 	cout << "frac05.reduce() is now called" << endl;
 	frac05.reduce();
 	cout << "frac05 is now " << frac05 << endl;
-	cout << "Conclusion: Fractions are reduced to simplest forms with the reduce() method" << endl << endl << endl;
+	cout << "Conclusion: Fractions are reduced to simplest forms with the reduce() member function" << endl << endl << endl;
 
 	
 	// Test 2.2: Reciprocal of a fraction (to be used during division)
@@ -178,7 +179,7 @@ int main()
 	cout << "'frac14 = frac12 + frac13' gives frac14 =  " << frac14 << endl;
 	frac14.reduce();
 	cout << "'frac14.reduce()' returns " << frac14 << endl;
-	cout << "Conclusion: Addition operator works corectly" << endl << endl;
+	cout << "Conclusion: Addition operator works correctly" << endl << endl;
 
 
 	// Test 5.2: Testing subtraction
@@ -189,7 +190,7 @@ int main()
 	cout << "'frac15 = frac12 - frac13' gives frac15 =  " << frac15 << endl;
 	frac15.reduce();
 	cout << "'frac15.reduce()' returns " << frac15 << endl;
-	cout << "Conclusion: Subtraction operator works corectly" << endl << endl;
+	cout << "Conclusion: Subtraction operator works correctly" << endl << endl;
 
 
 	// Test 5.3: Testing multiplication
@@ -200,7 +201,7 @@ int main()
 	cout << "'frac16 = frac12 * frac13' gives frac16 =  " << frac16 << endl;
 	frac16.reduce();
 	cout << "'frac16.reduce()' returns " << frac16 << endl;
-	cout << "Conclusion: Multiplication operator works corectly" << endl << endl;
+	cout << "Conclusion: Multiplication operator works correctly" << endl << endl;
 
 
 	// Test 5.4: Testing division
@@ -215,9 +216,10 @@ int main()
 	cout << "frac11 is " << frac11 << endl;
 	cout << "frac04 is " << frac04 << endl;
 	cout << "'frac04 / frac11' returns " << frac11 / frac04 << endl;
-	cout << "Conclusion: Division operator works corectly; if division is not possible, it returns the first fraction" << endl << endl;
+	cout << "Conclusion: Division operator works correctly; if division is not possible, it returns the first fraction" << endl << endl;
 
 
-	cout << "This concludes testing" << endl;
-	cout << "Each fraction object can be displayed by calling the displayFraction() member function" << endl << endl << endl;
+	cout << "This concludes the unit test routines" << endl << endl << endl;
+	cout << "Each fraction object can be displayed by calling the displayFraction() member function" << endl;
+	cout << "A non member function has also been included for display using 'cout': just use 'cout' with each fraction object instance like you would with primitive data types" << endl << endl << endl;
 }
