@@ -1,2 +1,2 @@
 # Fractions
-Still in beta!
+Unit test suite ready, run from Main.cpp
