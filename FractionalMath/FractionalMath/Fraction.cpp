@@ -253,7 +253,7 @@ const Fraction Fraction::operator/(const Fraction& incoming) const
 {
 	if (incoming.getNumerator() == 0)
 	{
-		// multiplication not possible, return same value
+		// division not possible, return same value
 		// do nothing
 		return *this;
 	}
