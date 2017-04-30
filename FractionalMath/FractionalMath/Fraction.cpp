@@ -154,18 +154,22 @@ Fraction::~Fraction()
 
 	this->setAbsNumerator(0);
 }
-Fraction::Fraction(const Fraction &incoming)
+Fraction::Fraction(const Fraction& incoming)
 {
 	if (&incoming != this)
 	{
-		// I'm slightly confused why getter doesn't work:
-		// this->setNumerator(incoming.getNumerator());
-		// and so, I'm going to have to use the member variables directly, and this is something I don't like much
-		
-		this->setNumerator(incoming._numerator_);
-		this->setDenominator(incoming._denominator_);
+		this->setNumerator(incoming.getNumerator());
+		this->setDenominator(incoming.getDenominator());
 
-		this->setAbsNumerator(incoming._abs_numerator_);
+		this->setAbsNumerator(incoming.getAbsNumerator());
+
+		
+		// or we could use the membervariables directly:
+
+		//this->setNumerator(incoming._numerator_);
+		//this->setDenominator(incoming._denominator_);
+
+		//this->setAbsNumerator(incoming._abs_numerator_);
 	}
 	else
 	{
@@ -176,9 +180,6 @@ Fraction::Fraction(const Fraction &incoming)
 
 void Fraction::displayFraction() const
 {
-	// this->reduce();
-
-	// printf("%d/%d", this->getNumerator(), this->getDenominator());
 	cout << this->getNumerator() << "/" << this->getDenominator();
 }
 void Fraction::displayDecimal() const
@@ -187,14 +188,22 @@ void Fraction::displayDecimal() const
 }
 
 
-Fraction &Fraction::operator=(const Fraction &incoming)
+Fraction& Fraction::operator=(const Fraction& incoming)
 {
 	if (&incoming != this)
 	{
-		this->setNumerator(incoming._numerator_);
-		this->setDenominator(incoming._denominator_);
+		this->setNumerator(incoming.getNumerator());
+		this->setDenominator(incoming.getDenominator());
 
-		this->setAbsNumerator(incoming._abs_numerator_);
+		this->setAbsNumerator(incoming.getAbsNumerator()); 
+		
+		
+		// or we could use the membervariables directly:
+
+		//this->setNumerator(incoming._numerator_);
+		//this->setDenominator(incoming._denominator_);
+
+		//this->setAbsNumerator(incoming._abs_numerator_);
 	}
 	else
 	{
@@ -203,71 +212,46 @@ Fraction &Fraction::operator=(const Fraction &incoming)
 
 	return *this;
 }
-bool Fraction::operator==(const Fraction &incoming) const
+
+const bool Fraction::operator==(const Fraction& incoming) const
 {
-	//bool flag = false;
-
-	//if (&incoming != this)
-	//{
-	//	Fraction frac1 = incoming;
-	//	Fraction frac2(this->_numerator_, this->_denominator_);
-
-	//	frac1.reduce();
-	//	frac2.reduce();
-
-	//	if ((frac1.getNumerator() == frac2.getNumerator()) && (frac1.getDenominator() == frac2.getDenominator()))
-	//	{
-	//		flag = true;
-	//	}
-	//	else
-	//	{
-	//		// not equal
-	//		// do nothing
-	//	}
-	//}
-	//else
-	//{
-	//	flag = true;
-	//}
-
-	//return flag;
 	return ((*this - incoming).getNumerator() == 0);
 }
-bool Fraction::operator!=(const Fraction &incoming) const
+const bool Fraction::operator!=(const Fraction& incoming) const
 {
 	return (!(*this == incoming));
 }
-bool Fraction::operator>(const Fraction &incoming) const
+const bool Fraction::operator>(const Fraction& incoming) const
 {
 	return ((*this - incoming).getNumerator() > 0);
 }
-bool Fraction::operator<(const Fraction &incoming) const
+const bool Fraction::operator<(const Fraction& incoming) const
 {
 	return ((*this - incoming).getNumerator() < 0);
 }
-bool Fraction::operator>=(const Fraction &incoming) const
+const bool Fraction::operator>=(const Fraction& incoming) const
 {
 	return ((*this > incoming) || (*this == incoming));
 }
-bool Fraction::operator<=(const Fraction &incoming) const
+const bool Fraction::operator<=(const Fraction& incoming) const
 {
 	return ((*this < incoming) || (*this == incoming));
 }
-Fraction Fraction::operator+(const Fraction &incoming) const
+const Fraction Fraction::operator+(const Fraction& incoming) const
 {
-	return Fraction(((this->getNumerator() * incoming._denominator_) + (this->getDenominator() * incoming._numerator_)), (this->getDenominator() * incoming._denominator_));
+	return Fraction(((this->getNumerator() * incoming.getDenominator()) + (this->getDenominator() * incoming.getNumerator())), (this->getDenominator() * incoming.getDenominator()));
 }
-Fraction Fraction::operator-(const Fraction &incoming) const
+const Fraction Fraction::operator-(const Fraction& incoming) const
 {
-	return Fraction(((this->getNumerator() * incoming._denominator_) - (this->getDenominator() * incoming._numerator_)), (this->getDenominator() * incoming._denominator_));
+	return Fraction(((this->getNumerator() * incoming.getDenominator()) - (this->getDenominator() * incoming.getNumerator())), (this->getDenominator() * incoming.getDenominator()));
 }
-Fraction Fraction::operator*(const Fraction &incoming) const
+const Fraction Fraction::operator*(const Fraction& incoming) const
 {
-	return Fraction((this->getNumerator() * incoming._numerator_), (this->getDenominator() * incoming._denominator_));
+	return Fraction((this->getNumerator() * incoming.getNumerator()), (this->getDenominator() * incoming.getDenominator()));
 }
-Fraction Fraction::operator/(const Fraction &incoming) const
+const Fraction Fraction::operator/(const Fraction& incoming) const
 {
-	if (incoming._numerator_ == 0)
+	if (incoming.getNumerator() == 0)
 	{
 		// multiplication not possible, return same value
 		// do nothing
@@ -275,8 +259,61 @@ Fraction Fraction::operator/(const Fraction &incoming) const
 	}
 	else
 	{
-		return Fraction((this->getNumerator() * incoming._denominator_), (this->getDenominator() * incoming._numerator_));
+		return Fraction((this->getNumerator() * incoming.getDenominator()), (this->getDenominator() * incoming.getNumerator()));
 	}
+}
+
+Fraction& Fraction::operator+=(const Fraction& incoming)
+{
+	this->setNumerator((this->getNumerator() * incoming.getDenominator()) + (this->getDenominator() * incoming.getNumerator()));
+	this->setDenominator(this->getDenominator() * incoming.getDenominator());
+
+	this->setAbsNumerator(abs(this->getNumerator()));
+
+	return *this;
+}
+Fraction& Fraction::operator-=(const Fraction& incoming)
+{
+	this->setNumerator((this->getNumerator() * incoming.getDenominator()) - (this->getDenominator() * incoming.getNumerator()));
+	this->setDenominator(this->getDenominator() * incoming.getDenominator());
+
+	this->setAbsNumerator(abs(this->getNumerator()));
+
+	return *this;
+}
+Fraction& Fraction::operator*=(const Fraction& incoming)
+{
+	this->setNumerator(this->getNumerator() * incoming.getNumerator());
+	this->setDenominator(this->getDenominator() * incoming.getDenominator());
+
+	this->setAbsNumerator(abs(this->getNumerator()));
+
+	return *this;
+}
+Fraction& Fraction::operator/=(const Fraction& incoming)
+{
+	if (incoming.getNumerator() != 0)
+	{
+		this->setNumerator(this->getNumerator() * incoming.getDenominator());
+		this->setDenominator(this->getDenominator() * incoming.getNumerator());
+
+		this->setAbsNumerator(abs(this->getNumerator()));
+
+		// manage the special case which makes the denominator go negative
+		if (this->getDenominator() < 0)
+		{
+			this->setNumerator(-1 * this->getNumerator());
+			this->setDenominator(-1 * this->getDenominator());
+		}
+	}
+
+	else
+	{
+		// division not possible
+		// do nothing
+	}
+
+	return *this;
 }
 
 
@@ -290,7 +327,7 @@ Fraction::operator float() const
 }
 
 
-ostream &operator<<(ostream &ostrm, Fraction fraction)
+ostream& operator<<(ostream& ostrm, Fraction fraction)
 {
 	return (ostrm << fraction.getNumerator() << "/" << fraction.getDenominator());
 }

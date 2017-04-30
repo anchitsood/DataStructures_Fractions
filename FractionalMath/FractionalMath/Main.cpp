@@ -21,6 +21,13 @@ Unit tests for Fraction class
 
 int main()
 {
+
+	// so eclipse will play nice
+	// disbale buffering, because eclipse outputs to pipe instead of console, and pipes are buffered
+	setvbuf(stdout, NULL, _IONBF, 0);
+	
+	
+
 	cout << "The Fraction class: implements fractions and standard operations on fractions." << endl;
 	cout << "Constructors: Fraction(numerator, denominator), Fraction(), Fraction(numerator)" << endl;
 	cout << "A few unit tests to ensure full functionality are implemented below:" << endl << endl << endl << endl;
@@ -108,8 +115,8 @@ int main()
 
 	cout << "frac07.reciprocal() is now called" << endl;
 	frac07.reciprocal();
-	cout << "frac06 is now " << frac06 << endl;
 	cout << "frac07 is now " << frac07 << endl;
+	cout << "frac06 is still " << frac06 << endl;
 	cout << "Conclusion: Copy constructor works as desired" << endl << endl << endl;
 
 
@@ -165,7 +172,7 @@ int main()
 
 	// Section 5: Mathematical operators		
 	cout << "Section 5: Mathematical operators and their outputs" << endl;
-	cout << "We test the function of some simple simple mathematical operators" << endl << endl << endl;
+	cout << "We test the function of some simple mathematical operators" << endl << endl << endl;
 
 	Fraction frac12(5, 12);
 	Fraction frac13(11, 10);
@@ -214,11 +221,80 @@ int main()
 
 	cout << "frac11 is " << frac11 << endl;
 	cout << "frac04 is " << frac04 << endl;
-	cout << "'frac04 / frac11' returns " << frac11 / frac04 << endl;
-	cout << "Conclusion: Division operator works correctly; if division is not possible, it returns the first fraction" << endl << endl;
+	cout << "'frac11 / frac04' returns " << frac11 / frac04 << endl;
+	cout << "Conclusion: Division operator works correctly; if division is not possible, it returns the first fraction" << endl << endl << endl << endl;
 
 
-	cout << "This concludes the unit test routines" << endl << endl << endl;
+
+	// Section 6: Compound assignment operators		
+	cout << "Section 6: Compound assignment operators and their outputs" << endl;
+	cout << "We test the function of some compound assignment operators" << endl << endl << endl;
+
+
+	// Test 6.1: Testing compound addition
+	cout << "Test 6.1: Testing addition '+='" << endl;
+	cout << "frac12 is " << frac12 << endl;
+	cout << "frac13 is " << frac13 << endl;
+	cout << "frac12 resides at memory location " << &frac12 << endl;
+	cout << "'frac12 += frac13' is used to reassign frac12" << endl;
+	frac12 += frac13;
+	cout << "frac12 is now " << frac12 << endl;
+	frac12.reduce();
+	cout << "'frac12.reduce()' returns " << frac12 << endl;
+	cout << "frac12 still resides at memory location " << &frac12 << endl;
+	cout << "Conclusion: Compound addition assignment operator works correctly" << endl << endl;
+
+
+	// Test 6.2: Testing compond subtraction
+	cout << "Test 6.2: Testing subtraction '-='" << endl;
+	cout << "frac13 is " << frac13 << endl;
+	cout << "frac12 is " << frac12 << endl;
+	cout << "frac13 resides at memory location " << &frac13 << endl;
+	cout << "'frac13 -= frac12' is used to reassign frac13" << endl;
+	frac13 -= frac12;
+	cout << "frac13 is now " << frac13 << endl;
+	frac13.reduce();
+	cout << "'frac13.reduce()' returns " << frac13 << endl;
+	cout << "frac13 still resides at memory location " << &frac13 << endl;
+	cout << "Conclusion: Compound subtraction assignment operator works correctly" << endl << endl;
+
+
+	// Test 6.3: Testing compound multiplication
+	cout << "Test 6.3: Testing multiplication '*='" << endl;
+	cout << "frac15 is " << frac15 << endl;
+	cout << "frac12 is " << frac12 << endl;
+	cout << "frac15 resides at memory location " << &frac15 << endl;
+	cout << "'frac15 *= frac12' is used to reassign frac15" << endl;
+	frac15 *= frac12;
+	cout << "frac15 is now " << frac15 << endl;
+	frac15.reduce();
+	cout << "'frac15.reduce()' returns " << frac15 << endl;
+	cout << "frac15 still resides at memory location " << &frac15 << endl;
+	cout << "Conclusion: Compound multiplication assignment operator works correctly" << endl << endl;
+
+
+	// Test 6.4: Testing compound division
+	cout << "Test 6.4: Testing division '/='" << endl;
+	cout << "frac16 is " << frac16 << endl;
+	cout << "frac13 is " << frac13 << endl;
+	cout << "frac16 resides at memory location " << &frac16 << endl;
+	cout << "'frac16 /= frac13' is used to reassign frac16" << endl;
+	frac16 /= frac13;
+	cout << "frac16 is now " << frac16 << endl;
+	frac16.reduce();
+	cout << "'frac16.reduce()' returns " << frac16 << endl;
+	cout << "frac16 still resides at memory location " << &frac16 << endl << endl;
+
+	cout << "frac11 is " << frac11 << endl;
+	cout << "frac04 is " << frac04 << endl;
+	cout << "'frac11 /= frac04' is used to reassign frac11" << endl;
+	frac11 /= frac04;
+	cout << "frac11 is now " << frac11 << endl;
+	cout << "Conclusion: Compound division assignment operator works correctly; if division is not possible, the assigned value remains unchanged" << endl << endl << endl;
+
+
+
+	cout << "This concludes the unit test routines" << endl << endl << endl << endl;
 	cout << "Each fraction object can be displayed by calling the displayFraction() member function" << endl;
 	cout << "A non member function has also been included for display using 'cout': just use 'cout' with each fraction object instance like you would with primitive data types" << endl << endl << endl;
 }

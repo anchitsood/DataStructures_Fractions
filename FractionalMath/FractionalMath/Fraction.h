@@ -18,7 +18,6 @@ Fraction class
 */
 
 
-#include <stdio.h>
 #include <math.h>
 #include <stdio.h>
 #include <iostream>
@@ -62,7 +61,7 @@ public:
 	Fraction(int input_numerator);
 	Fraction();
 	~Fraction();
-	Fraction(const Fraction &incoming);	// copy constructor
+	Fraction(const Fraction& incoming);	// copy constructor
 	
 	// functions to manipulate and edit a fraction object
 	void reduce();						// reduce a fraction by dividing numerator and denominator by gcd
@@ -71,26 +70,33 @@ public:
 	void displayDecimal() const;		// display decimal form of the fraction
 	
 	// operator definitions for fraction objects
-	Fraction &operator=(const Fraction &incoming);			// assignment
-	bool operator==(const Fraction &incoming) const;		// equality
-	bool operator!=(const Fraction &incoming) const;		// inequality
-	bool operator>(const Fraction &incoming) const;			// greater-than
-	bool operator<(const Fraction &incoming) const;			// less-than
-	bool operator>=(const Fraction &incoming) const;		// greater-than or equal
-	bool operator<=(const Fraction &incoming) const;		// less-than or equal
-	Fraction operator+(const Fraction &incoming) const;		// addition
-	Fraction operator-(const Fraction &incoming) const;		// subtraction
-	Fraction operator*(const Fraction &incoming) const;		// multiplication
-	Fraction operator/(const Fraction &incoming) const;		// division
+	Fraction& operator=(const Fraction& incoming);					// copy/assignment operator
+	
+	const bool operator==(const Fraction& incoming) const;			// equality
+	const bool operator!=(const Fraction& incoming) const;			// inequality
+	const bool operator>(const Fraction& incoming) const;			// greater-than
+	const bool operator<(const Fraction& incoming) const;			// less-than
+	const bool operator>=(const Fraction& incoming) const;			// greater-than or equal
+	const bool operator<=(const Fraction& incoming) const;			// less-than or equal
+	const Fraction operator+(const Fraction& incoming) const;		// addition
+	const Fraction operator-(const Fraction& incoming) const;		// subtraction
+	const Fraction operator*(const Fraction& incoming) const;		// multiplication
+	const Fraction operator/(const Fraction& incoming) const;		// division
+
+	Fraction& operator+=(const Fraction& incoming);					// compound addition operator
+	Fraction& operator-=(const Fraction& incoming);					// compound subtraction operator
+	Fraction& operator*=(const Fraction& incoming);					// compound multiplication operator
+	Fraction& operator/=(const Fraction& incoming);					// compound division operator
+
 
 	// explicit casts
 	operator double() const;	// explicit cast to double
 	operator float() const;		// explicit cast to float
 	// operator int() const;
-	// This is dangerous because we lose information about the denominator, so removing this
+	// This is dangerous because we lose information about the denominator, so removing this int() cast
 };
 
 
 
 // included for ease of use with cout
-ostream &operator<<(ostream &ostrm, Fraction fraction);
+ostream& operator<<(ostream& ostrm, Fraction fraction);
