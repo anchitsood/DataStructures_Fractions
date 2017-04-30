@@ -124,43 +124,16 @@ Fraction::Fraction()
 }
 Fraction::Fraction(int input_numerator, int input_denominator)
 {
-	if ((input_numerator >= 0) && (input_denominator >= 0))
+	this->setNumerator(input_numerator);
+	this->setDenominator(input_denominator);
+
+	this->setAbsNumerator(abs(input_numerator));
+
+	// manage the special case which makes the denominator negative
+	if (this->getDenominator() < 0)
 	{
-		this->setNumerator(input_numerator);
-		this->setDenominator(input_denominator);
-
-		this->setAbsNumerator(input_numerator);
-	}
-
-	else if ((input_numerator < 0) && (input_denominator >= 0))
-	{
-		this->setNumerator(input_numerator);
-		this->setDenominator(input_denominator);
-
-		this->setAbsNumerator(-input_numerator);
-	}
-
-	else if ((input_numerator < 0) && (input_denominator < 0))
-	{
-		this->setNumerator(-input_numerator);
-		this->setDenominator(-input_denominator);
-
-		this->setAbsNumerator(-input_numerator);
-	}
-
-	else if ((input_numerator >= 0) && (input_denominator < 0))
-	{
-		this->setNumerator(-input_numerator);
-		this->setDenominator(-input_denominator);
-
-		this->setAbsNumerator(input_numerator);
-	}
-
-	else
-	{
-		// this case will never happen, just adding for completeness
-		this->setNumerator(0);
-		this->setDenominator(0);
+		this->setNumerator(-1 * this->getNumerator());
+		this->setDenominator(-1 * this->getDenominator());
 	}
 }
 Fraction::Fraction(int input_numerator)
@@ -185,14 +158,6 @@ Fraction::Fraction(const Fraction& incoming)
 		this->setDenominator(incoming.getDenominator());
 
 		this->setAbsNumerator(incoming.getAbsNumerator());
-
-		
-		// or we could use the membervariables directly:
-
-		//this->setNumerator(incoming._numerator_);
-		//this->setDenominator(incoming._denominator_);
-
-		//this->setAbsNumerator(incoming._abs_numerator_);
 	}
 	else
 	{
@@ -219,14 +184,6 @@ Fraction& Fraction::operator=(const Fraction& incoming)
 		this->setDenominator(incoming.getDenominator());
 
 		this->setAbsNumerator(incoming.getAbsNumerator()); 
-		
-		
-		// or we could use the membervariables directly:
-
-		//this->setNumerator(incoming._numerator_);
-		//this->setDenominator(incoming._denominator_);
-
-		//this->setAbsNumerator(incoming._abs_numerator_);
 	}
 	else
 	{
@@ -322,7 +279,7 @@ Fraction& Fraction::operator/=(const Fraction& incoming)
 
 		this->setAbsNumerator(abs(this->getNumerator()));
 
-		// manage the special case which makes the denominator go negative
+		// manage the special case which makes the denominator become negative
 		if (this->getDenominator() < 0)
 		{
 			this->setNumerator(-1 * this->getNumerator());
